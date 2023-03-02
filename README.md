@@ -1,6 +1,6 @@
-# Object-Classification-and-Classifier-Analysis
+# Simple-Image-Classification-Model-Code
 
-Classify objects using DL-based image classification model [rexnet_150](https://github.com/clovaai/rexnet) [(paper)](https://arxiv.org/pdf/2007.00992.pdf), test the model performance on unseen images during training, and perform model analysis using [GradCAM](https://github.com/jacobgil/pytorch-grad-cam).
+Classify objects using DL-based image classification model [resnet50](https://github.com/huggingface/pytorch-image-models/blob/main/timm/models/resnet.py) [(paper)](https://www.cv-foundation.org/openaccess/content_cvpr_2016/papers/He_Deep_Residual_Learning_CVPR_2016_paper.pdf), test the model performance on unseen images during training, and perform model analysis using [GradCAM](https://github.com/jacobgil/pytorch-grad-cam).
 
 ### Create virtual environment
 ```python
