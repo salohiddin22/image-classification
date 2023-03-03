@@ -13,6 +13,9 @@ pip install -r requirements.txt
 
 ![Capture]
 
+
+file:///mnt/C6E2920FE29203B9/din/Deep_l/1_classification/Object-Classification-Modified/experiment/resnet/resnet50_64/3_cmatrix.png
+
 ### Run training 
 ```
 python main.py  --root="/classification/1_data/nuts/"  -bs=32 -mn='resnet50' -d='cuda:0' -ld="resnet50_dir" -eps=100
