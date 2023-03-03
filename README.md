@@ -13,8 +13,8 @@ pip install -r requirements.txt
 
 ![Capture]
 
+![3_cmatrix](https://user-images.githubusercontent.com/89576437/222754276-a9a2e64a-de91-4b14-8363-973f0246d936.png)
 
-file:///mnt/C6E2920FE29203B9/din/Deep_l/1_classification/Object-Classification-Modified/experiment/resnet/resnet50_64/3_cmatrix.png
 
 ### Run training 
 ```
