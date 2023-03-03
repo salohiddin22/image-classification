@@ -11,14 +11,12 @@ pip install -r requirements.txt
 
 ### Sample data
 
-![Capture]
-
-![3_cmatrix](https://user-images.githubusercontent.com/89576437/222754276-a9a2e64a-de91-4b14-8363-973f0246d936.png)
+![image](https://user-images.githubusercontent.com/89576437/222754944-3e69f284-a8df-4561-bb76-40509e91a17f.png)
 
 
 ### Run training 
 ```
-python main.py  --root="/classification/1_data/nuts/"  -bs=32 -mn='resnet50' -d='cuda:0' -ld="resnet50_dir" -eps=100
+python main.py  --root="/classification/1_data/nuts/"  -bs=32 -mn='resnet50' -d='cuda:0' -ld="resnet50_dir" -eps=20
 ```
 
 ### Results
