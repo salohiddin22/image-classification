@@ -1,21 +1,24 @@
-import torch, timm
-import os, numpy as np
-from  tqdm import tqdm
+import torch
+import timm
 import re
+import glob
+#import os, numpy as np
+from  tqdm import tqdm
 from utils import plot_confusion_matrix
 
-def inference(model_name, num_classes, log_dir, device, dl, cls_names):
+
+def inference(model_name, num_classes, device, dl, cls_names):
     
     '''
     Gets a model name, number of classes for the dataset, model directory, device type, dataloader and class names;
     performs inference and plots the confusion matrix on performance.
     
     Arguments:
-    model_name - model name for training;
+    model_name  - model name for training;
     num_classes - number of classes for the dataset;
-    log_dir - directory where model outputs are saved;
-    device - device type;
-    dl - dataloader.
+    device      - device type;
+    dl          - dataloader.
+    
     '''
     
     # Create lists for predictions, ground truths, and images
@@ -28,18 +31,13 @@ def inference(model_name, num_classes, log_dir, device, dl, cls_names):
     model.to(device)
     
     # Load checkpoint from the model directory
- 
-    network_files = os.listdir(log_dir)
-    validation_acc_file = [string for string in network_files if 'val_accuracies' in string]
-    bestEpoch = validation_acc_file[0].split('_')
-    bestEpoch = bestEpoch[-1]
-    bestEpoch = bestEpoch.split('.')
-    bestEpoch = bestEpoch[0]
-    bestEpoch = int(re.search(r'\d+', bestEpoch).group())
+    # Already inside the model_dir because of "plot_loss_acc()" call in the train.py
+    dir_files = glob.glob('*.txt')  
+    train_acc_file = dir_files[0]
+    bestEpoch = re.findall('[0-9]+', train_acc_file)
+    bestEpoch = int(bestEpoch[-1])
 
-    # bestEpoch = validation_acc_file[0].rstrip(".txt")
-    # bestEpoch = bestEpoch[-1]
-    model.load_state_dict(torch.load(f"{log_dir}/checkpoint_{bestEpoch}_best.pth"))
+    model.load_state_dict(torch.load(f"./checkpoint_{bestEpoch}_best.pth"))
     print("Model checkpoint loaded successfully!")
     
     # Set initial correct cases and total samples
@@ -53,8 +51,9 @@ def inference(model_name, num_classes, log_dir, device, dl, cls_names):
         ims, lbls = batch
         
         # Get predictions
-        preds = model(ims.to(device))
-        images.extend(ims.to(device))
+        ims = ims.to(device)
+        preds = model(ims)
+        images.extend(ims)
         
         # Get classes with max values
         _, predicted = torch.max(preds.data, 1)
@@ -70,12 +69,10 @@ def inference(model_name, num_classes, log_dir, device, dl, cls_names):
         
         # Get correct predictions
         correct += (predicted == lbls.to(device)).sum().item()        
-        
-    print(f'Accuracy of the network on the {total} test images: {100 * correct // total} %')  
+    test_acc = 100 * correct // total    
+    print(f'Accuracy of the network on the {total} test images: {test_acc} %')  
     
     # Return model, predictions, ground truths, and images
     #return model, torch.stack(predictions), torch.stack(gts), torch.stack(images)
     
-    plot_confusion_matrix(gts, predictions, cls_names, log_dir)
-
-    
+    plot_confusion_matrix(gts, predictions, cls_names, test_acc)

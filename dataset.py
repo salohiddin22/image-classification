@@ -2,6 +2,12 @@ from torchvision.datasets import ImageFolder
 from torch.utils.data import DataLoader
 import torch
 
+seed = 0
+torch.manual_seed(seed)
+torch.cuda.manual_seed(seed)
+torch.manual_seed(seed)
+torch.backends.cudnn.benchmark = False
+torch.backends.cudnn.deterministic = True
 
 def get_dl(root, batch_size, t):
     
@@ -11,16 +17,16 @@ def get_dl(root, batch_size, t):
     
     Arguments:
         root - path to the images;
-        bs - batch size of the dataloaders;
-        t - transformations;
+        bs   - batch size of the dataloaders;
+        t    - transformations;
         
     Outputs:
     
-        cls_names - names of the classes in the dataset;
+        cls_names   - names of the classes in the dataset;
         num_classes - number of the classes in the dataset;
-        tr_dl - train dataloader;
-        val_dl - validation dataloader;
-        test_dl - test dataloader.
+        tr_dl       - train dataloader;
+        val_dl      - validation dataloader;
+        test_dl     - test dataloader.
         
     '''
     
