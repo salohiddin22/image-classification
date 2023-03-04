@@ -56,8 +56,8 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description = 'Image Classification Training Arguments')
     parser.add_argument("-r", "--root", type = str, default = 'simple_classification', help = "Path to the data")
     parser.add_argument("-bs", "--batch_size", type = int, default = 64, help = "Mini-batch size")
-    parser.add_argument("-mn", "--model_name", type = str, default = 'rexnet_150', help = "Model name for backbone")
-    parser.add_argument("-d", "--device", type = str, default = 'cuda:3', help = "GPU device number")
+    parser.add_argument("-mn", "--model_name", type = str, default = 'resnet50', help = "Model name for backbone")
+    parser.add_argument("-d", "--device", type = str, default = 'cuda:0', help = "GPU device number")
     parser.add_argument("-lr", "--learning_rate", type = float, default = 1e-3, help = "Learning rate value")
     parser.add_argument("-ld", "--log_dir", type = str, default = 'resnet50', help = "Directory to save the model outputs" )
     parser.add_argument("-eps", "--epochs", type = int, default = 50, help = "Epoch count")
@@ -69,4 +69,4 @@ if __name__ == "__main__":
 # How to run the code and train and test any model you specify? >>>
 # Copy and paste the following in the terminal without "#"
 
- # python main.py  --root="/mnt/C6E2920FE29203B9/din/Deep_l/1_classification/1_data/nuts/train/"  -bs=192  -mn='resnet50' -d='cuda:0' -ld="resnet50_dir" -eps=2
+ # python main.py  --root="/mnt/C6E2920FE29203B9/din/Deep_l/1_classification/1_data/nuts/train/"  -bs=192  -mn='resnet50' -d='cuda:0' -ld="resnet50_dir" -eps=20
